@@ -1,4 +1,5 @@
 from InquirerPy import prompt
+from InquirerPy.validator import EmptyInputValidator
 
 license_list=[
     "Academic Free License v3.0 (AFL-3.0)",
@@ -39,14 +40,16 @@ license_list=[
     "zLib License (Zlib)"
 ]
 
+
+
 questions = [
-    {"type": "input", "name":"title","message":"What is your project title?"},
-    {"type": "input", "name":"description","message":"What is the project description?"},
-    {"type": "input", "name":"installation","message":"What are installation instructions?"},
-    {"type": "input", "name":"usage","message":"What is usage information?"},
+    {"type": "input", "name":"title","message":"What is your project title?","validate": EmptyInputValidator("Project title cannot be empty")},
+    {"type": "input", "name":"description","message":"What is the project description?","validate": EmptyInputValidator("Project description cannot be empty")},
+    {"type": "input", "name":"installation","message":"What are installation instructions?","validate": EmptyInputValidator("Installation instructions cannot be empty")},
+    {"type": "input", "name":"usage","message":"What is usage information?","validate": EmptyInputValidator("Usage information cannot be empty")},
     {"type": "list", "name":"license","message":"choose a license","choices":license_list},
-    {"type": "input", "name":"name","message":"What is Author's name?"},
-    {"type": "input", "name":"contact","message":"What is Author's contact information?"},
+    {"type": "input", "name":"name","message":"What is the author's name?","validate": EmptyInputValidator("Author's name cannot be empty")},
+    {"type": "input", "name":"contact","message":"What is the author's contact information?","validate": EmptyInputValidator("Author's contact cannot be empty")},
 ]
 
 answers = prompt(questions)
