@@ -41,15 +41,31 @@ license_list=[
 ]
 
 
+def readme_generator ():
+    print("Please answer questions below to generate a readme file")
+    questions = [
+        {"type": "input", "name":"title","message":"What is your project title?","validate": EmptyInputValidator("Project title cannot be empty")},
+        {"type": "input", "name":"description","message":"What is the project description?","validate": EmptyInputValidator("Project description cannot be empty")},
+        {"type": "input", "name":"installation","message":"What are installation instructions?","validate": EmptyInputValidator("Installation instructions cannot be empty")},
+        {"type": "input", "name":"usage","message":"What is usage information?","validate": EmptyInputValidator("Usage information cannot be empty")},
+        {"type": "list", "name":"license","message":"choose a license","choices":license_list},
+        {"type": "input", "name":"author","message":"What is the author's name?","validate": EmptyInputValidator("Author's name cannot be empty")},
+        {"type": "input", "name":"contact","message":"What is the author's contact information?","validate": EmptyInputValidator("Author's contact cannot be empty")}
+    ]
+    answers = prompt(questions)
+    with open("readme.md","w") as md_file:
+        md_file.write(f"# {answers['title'].title()}\n\n")
+        for key,value in answers.items():
+            if key != "title":
+                formated_key=key.title()
+                md_file.write(f"## {formated_key}\n")
+                formated_value=value.capitalize()
+                md_file.write(f"{formated_value}\n\n")
+    print ("Readme file has been created")
+    print ("Generated readme file content:")
+    with open("readme.md","r") as md_file:
+        for line in md_file:
+            print(line)
+    
 
-questions = [
-    {"type": "input", "name":"title","message":"What is your project title?","validate": EmptyInputValidator("Project title cannot be empty")},
-    {"type": "input", "name":"description","message":"What is the project description?","validate": EmptyInputValidator("Project description cannot be empty")},
-    {"type": "input", "name":"installation","message":"What are installation instructions?","validate": EmptyInputValidator("Installation instructions cannot be empty")},
-    {"type": "input", "name":"usage","message":"What is usage information?","validate": EmptyInputValidator("Usage information cannot be empty")},
-    {"type": "list", "name":"license","message":"choose a license","choices":license_list},
-    {"type": "input", "name":"name","message":"What is the author's name?","validate": EmptyInputValidator("Author's name cannot be empty")},
-    {"type": "input", "name":"contact","message":"What is the author's contact information?","validate": EmptyInputValidator("Author's contact cannot be empty")},
-]
-
-answers = prompt(questions)
+readme_generator()
