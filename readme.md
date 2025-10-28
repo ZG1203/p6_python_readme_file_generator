@@ -1,20 +1,20 @@
-# Week 6 Python Readme Generator
+# Readme Generator
 
 ## Description
-A tool to generator a readme file for github repo using pythong
+Using python to generator a file
 
 ## Installation
-Clone the code locally
+Copy code
 
 ## Usage
-Python main.py file
+Python main file
 
 ## License
-Mit (mit)
+Bsd 4-clause 'original' or 'old' license (bsd-4-clause)
 
 ## Author
 Zheng
 
 ## Contact
-123@abc.com
+123@abe.com
 

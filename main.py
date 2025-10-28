@@ -53,19 +53,23 @@ def readme_generator ():
         {"type": "input", "name":"contact","message":"What is the author's contact information?","validate": EmptyInputValidator("Author's contact cannot be empty")}
     ]
     answers = prompt(questions)
-    with open("readme.md","w") as md_file:
-        md_file.write(f"# {answers['title'].title()}\n\n")
-        for key,value in answers.items():
-            if key != "title":
-                formated_key=key.title()
-                md_file.write(f"## {formated_key}\n")
-                formated_value=value.capitalize()
-                md_file.write(f"{formated_value}\n\n")
-    print ("Readme file has been created")
-    print ("Generated readme file content:")
-    with open("readme.md","r") as md_file:
-        for line in md_file:
+    try:
+        with open("readme.md","w") as md_file:
+            md_file.write(f"# {answers['title'].title()}\n\n")
+            for key,value in answers.items():
+                if key != "title":
+                    formated_key=key.title()
+                    md_file.write(f"## {formated_key}\n")
+                    formated_value=value.capitalize()
+                    md_file.write(f"{formated_value}\n\n")
+        print ("Readme file has been created")
+        print ("Generated readme file content:")
+        with open("readme.md","r") as md_file:
+            content = md_file.read()
+        lines = content.split('\n')
+        for line in lines:
             print(line)
-    
+    except Exception as e:
+        print (f"Error reading text file: {e}")
 
 readme_generator()
